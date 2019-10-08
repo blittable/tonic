@@ -14,11 +14,10 @@ fn build_protobufs(proto_root: &'static str) {
 }
 
 fn process_entries<F>(f: &DirEntry) {
-    println!("Entry: {:?}", f);
     tonic_build::compile_protos(f.path()).unwrap();
 }
 
-// recursively get files 
+// recursively get files
 fn visit_dirs(dir: &Path, cb: &dyn Fn(&DirEntry)) -> io::Result<()> {
     if dir.is_dir() {
         for entry in fs::read_dir(dir)? {
