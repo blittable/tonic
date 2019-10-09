@@ -13,9 +13,15 @@ edition = "2018"
 #harness= false
 
 [[bench]]
-name = "serialization"
-path = "benches/serialization.rs"
+name = "request_response"
+path = "benches/request_response.rs"
 harness= false 
+
+[[bench]]
+name = "request_response_diverse_fields"
+path = "benches/request_response_diverse_types.rs"
+harness= false 
+
 
 [dependencies]
 tonic = { path = "../tonic", features = ["rustls"] }
