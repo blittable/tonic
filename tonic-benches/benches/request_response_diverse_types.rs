@@ -16,7 +16,7 @@ fn build_request(_name: String) {
         field1: 10,
         field2: 20,
         field3: 30,
-        field15: String::from("clandestine"),
+        field15: _name,
         field12: false,
         field13: 70,
         field14: 80,
@@ -35,7 +35,49 @@ fn build_request(_name: String) {
         field300: 4000,
     }; 
 
- //   let _request = tonic::Request::new(GoogleMessage1 { field1: _name });
+ let _request = tonic::Request::new(GoogleMessage1 { 
+     field1: String::from("foo"),
+field9: String::from("red"),
+field18: String::from("red"),
+field80: true,
+field81: true,
+field2: 10,
+field3: 30,
+field280: 28,
+field6: 60,
+field22: 220,
+field4: String::from("red"),
+field5: Vec::new(),
+field59: true,
+field7: String::from("blue"),
+field16: 160,
+field130: 13,
+field17: false,
+field12: true, 
+field13: true, 
+field14: false, 
+field104: 1040,
+field100: 50,
+field101: 1010,
+field102: String::from("green"),
+field103: String::from("pink"),
+field29: 290,
+field30: true,
+field60: 601,
+field271: 27,
+field272: 200,
+field150: 15,
+field23: 230,
+field24: false,
+field25: 250,
+field15: Some(sub_message), 
+field78: true,
+field67: 670,
+field68: 680,
+field128: 1280,
+field129: String::from("red"),
+field131: 300,
+});
 }
 
 fn bench_throughput(c: &mut Criterion) {
@@ -46,18 +88,16 @@ fn bench_throughput(c: &mut Criterion) {
 
     group.plot_config(plot_config);
 
-    let tiny_string = utils::generate_rnd_string(100).unwrap();
-    let short_string = utils::generate_rnd_string(1_000).unwrap();
-    let medium_string = utils::generate_rnd_string(10_000).unwrap();
-    let big_string = utils::generate_rnd_string(100_000).unwrap();
-    let huge_string = utils::generate_rnd_string(1_000_000).unwrap();
+    let tiny_string = utils::generate_rnd_string(10).unwrap();
+    let short_string = utils::generate_rnd_string(100).unwrap();
+    let medium_string = utils::generate_rnd_string(1000).unwrap();
 
     for size in [tiny_string, short_string, medium_string].iter() {
         group.throughput(Throughput::Bytes(size.len() as u64));
 
-        // group.bench_with_input(BenchmarkId::new("request", size.len()), size, |b, i| {
-        //     b.iter(|| build_request(i.to_string()))
-        // });
+        group.bench_with_input(BenchmarkId::new("request", size.len()), size, |b, i| {
+            b.iter(|| build_request(i.to_string()))
+        });
     }
     group.finish();
 }
