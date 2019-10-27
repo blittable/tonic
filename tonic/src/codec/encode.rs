@@ -7,7 +7,7 @@ use http_body::Body;
 use pin_project::pin_project;
 use std::pin::Pin;
 use std::task::{Context, Poll};
-use tokio_codec::Encoder;
+use tokio::codec::Encoder;
 
 const BUFFER_SIZE: usize = 8 * 1024;
 

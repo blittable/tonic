@@ -44,6 +44,7 @@ harness = false
 [dev-dependencies]
 rand = "0.7.2"
 criterion = "0.3"
+tokio-test = { version = "=0.2.0-alpha.6" }
 
 [dependencies]
 bytes = "0.4"
@@ -55,7 +56,6 @@ base64 = "0.10"
 
 percent-encoding = "1.0.1"
 tower-service = "=0.3.0-alpha.2"
-tokio-codec = "=0.2.0-alpha.6"
 async-stream = "0.1.2"
 http-body = "=0.2.0-alpha.3"
 pin-project = "^0.4"
@@ -69,7 +69,7 @@ async-trait = { version = "0.1.13", optional = true }
 
 # transport
 hyper = { version = "=0.13.0-alpha.4", default-features = false, features = ["tcp", "unstable-stream"], optional = true }
-tokio = { version = "=0.2.0-alpha.6", default-features = false, features = ["io"], optional = true }
+tokio = { version = "=0.2.0-alpha.6", default-features = false, features = ["io", "codec"], optional = true }
 tower = { version = "=0.3.0-alpha.2", optional = true}
 tower-make = "=0.3.0-alpha.2a"
 tower-reconnect = { version = "=0.3.0-alpha.2", optional = true }
